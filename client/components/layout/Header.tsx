@@ -19,9 +19,9 @@ export default function Header() {
             className="flex items-center hover:opacity-80 transition"
           >
             <img
-              src="/logo.png"
+              src="/logo.svg"
               alt="Тарҷумаи Тоҷикӣ"
-              className="h-14 w-auto object-contain"
+              className="h-16 w-auto"
             />
           </Link>
 
