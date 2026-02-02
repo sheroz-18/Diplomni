@@ -56,10 +56,15 @@ export default function DictionaryManager() {
     const loadLanguages = async () => {
       try {
         const response = await fetch("/api/admin/languages");
+        if (!response.ok) {
+          throw new Error(`Failed to load languages: ${response.status}`);
+        }
         const data = await response.json();
-        setLanguages(data.supportedLanguages);
+        setLanguages(data.supportedLanguages || []);
       } catch (err) {
-        console.error("Error loading languages:", err);
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        console.error("Error loading languages:", errorMessage);
+        alert(`Error loading languages: ${errorMessage}`);
       }
     };
 
@@ -74,14 +79,16 @@ export default function DictionaryManager() {
         const response = await fetch(
           `/api/admin/dictionary/${selectedLanguage}`
         );
-        if (response.ok) {
-          const data = await response.json();
-          setEntries(data.entries);
-        } else {
-          setEntries([]);
+        if (!response.ok) {
+          throw new Error(`Failed to load entries: ${response.status}`);
         }
+        const data = await response.json();
+        setEntries(data.entries || []);
       } catch (err) {
-        console.error("Error loading entries:", err);
+        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        console.error("Error loading entries:", errorMessage);
+        alert(`Error loading entries: ${errorMessage}`);
+        setEntries([]);
       } finally {
         setIsLoading(false);
       }
