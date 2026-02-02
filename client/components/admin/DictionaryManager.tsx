@@ -197,17 +197,29 @@ export default function DictionaryManager() {
         `/api/admin/dictionary/${selectedLanguage}/${word}`,
         { method: "DELETE" }
       );
-      if (!response.ok) throw new Error("Failed to delete");
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        const errorMessage = errorData.error || `Error: ${response.status}`;
+        throw new Error(errorMessage);
+      }
 
       // Reload entries
       const reloadResponse = await fetch(
         `/api/admin/dictionary/${selectedLanguage}`
       );
+
+      if (!reloadResponse.ok) {
+        throw new Error("Failed to reload entries");
+      }
+
       const data = await reloadResponse.json();
-      setEntries(data.entries);
+      setEntries(data.entries || []);
+      alert("Word deleted successfully!");
     } catch (err) {
-      console.error("Error deleting entry:", err);
-      alert("Error deleting entry");
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      console.error("Error deleting entry:", errorMessage);
+      alert(`Error deleting entry: ${errorMessage}`);
     }
   };
 
