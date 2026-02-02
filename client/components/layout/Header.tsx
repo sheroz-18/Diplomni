@@ -51,6 +51,12 @@ export default function Header() {
             >
               Оид ба мо
             </a>
+            <Link
+              to="/admin"
+              className="text-gray-700 hover:text-blue-600 font-medium transition px-3 py-1 bg-blue-50 rounded-lg"
+            >
+              Admin
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -97,6 +103,13 @@ export default function Header() {
             >
               Оид ба мо
             </a>
+            <Link
+              to="/admin"
+              onClick={() => setIsOpen(false)}
+              className="block px-4 py-2 text-gray-700 hover:bg-blue-50 hover:text-blue-600 rounded-lg font-medium transition bg-blue-50"
+            >
+              Admin
+            </Link>
           </nav>
         )}
       </div>

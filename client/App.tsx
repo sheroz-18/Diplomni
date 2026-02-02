@@ -9,6 +9,7 @@ import Index from "./pages/Index";
 import TranslatorPage from "./pages/TranslatorPage";
 import DictionaryPage from "./pages/DictionaryPage";
 import AIAssistantPage from "./pages/AIAssistantPage";
+import AdminPage from "./pages/AdminPage";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -25,6 +26,7 @@ export default function App() {
             <Route path="/translator" element={<TranslatorPage />} />
             <Route path="/dictionary" element={<DictionaryPage />} />
             <Route path="/ai" element={<AIAssistantPage />} />
+            <Route path="/admin" element={<AdminPage />} />
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
             <Route path="*" element={<NotFound />} />
           </Routes>

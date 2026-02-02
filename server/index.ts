@@ -4,6 +4,16 @@ import cors from "cors";
 import { handleDemo } from "./routes/demo";
 import { handleTranslate } from "./routes/translate";
 import { handleDictionary } from "./routes/dictionary";
+import {
+  handleGetDictionaryByLanguage,
+  handleGetDictionaryEntry,
+  handleCreateDictionaryEntry,
+  handleUpdateDictionaryEntry,
+  handleDeleteDictionaryEntry,
+  handleBatchCreateDictionaryEntries,
+  handleSearchDictionary,
+  handleGetSupportedLanguages,
+} from "./routes/dictionary-admin";
 
 export function createServer() {
   const app = express();
@@ -24,6 +34,19 @@ export function createServer() {
   // Translator API routes
   app.post("/api/translate", handleTranslate);
   app.post("/api/dictionary", handleDictionary);
+
+  // Dictionary Admin API routes (CRUD)
+  app.get("/api/admin/languages", handleGetSupportedLanguages);
+  app.get("/api/admin/dictionary/:language", handleGetDictionaryByLanguage);
+  app.get("/api/admin/dictionary/:language/:word", handleGetDictionaryEntry);
+  app.post("/api/admin/dictionary", handleCreateDictionaryEntry);
+  app.put("/api/admin/dictionary/:language/:word", handleUpdateDictionaryEntry);
+  app.delete(
+    "/api/admin/dictionary/:language/:word",
+    handleDeleteDictionaryEntry,
+  );
+  app.post("/api/admin/dictionary/batch", handleBatchCreateDictionaryEntries);
+  app.get("/api/admin/dictionary-search", handleSearchDictionary);
 
   return app;
 }
