@@ -43,7 +43,7 @@ export function createServer() {
   app.put("/api/admin/dictionary/:language/:word", handleUpdateDictionaryEntry);
   app.delete(
     "/api/admin/dictionary/:language/:word",
-    handleDeleteDictionaryEntry
+    handleDeleteDictionaryEntry,
   );
   app.post("/api/admin/dictionary/batch", handleBatchCreateDictionaryEntries);
   app.get("/api/admin/dictionary-search", handleSearchDictionary);

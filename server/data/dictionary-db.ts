@@ -384,7 +384,8 @@ export const dictionaryDatabase: DictionaryData = {
     work: [
       {
         partOfSpeech: "Noun",
-        meaning: "Activity involving mental or physical effort done in order to achieve a purpose",
+        meaning:
+          "Activity involving mental or physical effort done in order to achieve a purpose",
         example: "Hard work leads to success.",
         synonyms: ["job", "labor", "task"],
         antonyms: ["rest", "leisure"],

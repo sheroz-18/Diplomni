@@ -62,7 +62,8 @@ export default function DictionaryManager() {
         const data = await response.json();
         setLanguages(data.supportedLanguages || []);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        const errorMessage =
+          err instanceof Error ? err.message : "Unknown error";
         console.error("Error loading languages:", errorMessage);
         alert(`Error loading languages: ${errorMessage}`);
       }
@@ -77,7 +78,7 @@ export default function DictionaryManager() {
       setIsLoading(true);
       try {
         const response = await fetch(
-          `/api/admin/dictionary/${selectedLanguage}`
+          `/api/admin/dictionary/${selectedLanguage}`,
         );
         if (!response.ok) {
           throw new Error(`Failed to load entries: ${response.status}`);
@@ -85,7 +86,8 @@ export default function DictionaryManager() {
         const data = await response.json();
         setEntries(data.entries || []);
       } catch (err) {
-        const errorMessage = err instanceof Error ? err.message : "Unknown error";
+        const errorMessage =
+          err instanceof Error ? err.message : "Unknown error";
         console.error("Error loading entries:", errorMessage);
         alert(`Error loading entries: ${errorMessage}`);
         setEntries([]);
@@ -98,7 +100,7 @@ export default function DictionaryManager() {
   }, [selectedLanguage]);
 
   const filteredEntries = entries.filter((entry) =>
-    entry.word.toLowerCase().includes(searchQuery.toLowerCase())
+    entry.word.toLowerCase().includes(searchQuery.toLowerCase()),
   );
 
   const handleAddClick = () => {
@@ -151,7 +153,7 @@ export default function DictionaryManager() {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({ definitions: payload.definitions }),
-          }
+          },
         );
 
         if (!response.ok) {
@@ -176,7 +178,7 @@ export default function DictionaryManager() {
 
       // Reload entries
       const reloadResponse = await fetch(
-        `/api/admin/dictionary/${selectedLanguage}`
+        `/api/admin/dictionary/${selectedLanguage}`,
       );
 
       if (!reloadResponse.ok) {
@@ -188,7 +190,11 @@ export default function DictionaryManager() {
       setIsOpenDialog(false);
 
       // Show success message
-      alert(editingWord ? "Word updated successfully!" : "Word created successfully!");
+      alert(
+        editingWord
+          ? "Word updated successfully!"
+          : "Word created successfully!",
+      );
     } catch (err) {
       const errorMessage = err instanceof Error ? err.message : "Unknown error";
       console.error("Error saving entry:", errorMessage);
@@ -202,7 +208,7 @@ export default function DictionaryManager() {
     try {
       const response = await fetch(
         `/api/admin/dictionary/${selectedLanguage}/${word}`,
-        { method: "DELETE" }
+        { method: "DELETE" },
       );
 
       if (!response.ok) {
@@ -213,7 +219,7 @@ export default function DictionaryManager() {
 
       // Reload entries
       const reloadResponse = await fetch(
-        `/api/admin/dictionary/${selectedLanguage}`
+        `/api/admin/dictionary/${selectedLanguage}`,
       );
 
       if (!reloadResponse.ok) {
@@ -253,7 +259,9 @@ export default function DictionaryManager() {
             </DialogHeader>
             <div className="space-y-4 py-4">
               <div>
-                <label className="text-sm font-medium text-gray-700">Word</label>
+                <label className="text-sm font-medium text-gray-700">
+                  Word
+                </label>
                 <Input
                   value={formWord}
                   onChange={(e) => setFormWord(e.target.value)}
@@ -318,7 +326,10 @@ export default function DictionaryManager() {
             <label className="block text-sm font-medium text-gray-700 mb-2">
               Select Language
             </label>
-            <Select value={selectedLanguage} onValueChange={setSelectedLanguage}>
+            <Select
+              value={selectedLanguage}
+              onValueChange={setSelectedLanguage}
+            >
               <SelectTrigger>
                 <SelectValue />
               </SelectTrigger>
@@ -356,9 +367,7 @@ export default function DictionaryManager() {
             <Loader2 className="animate-spin text-blue-600" />
           </div>
         ) : filteredEntries.length === 0 ? (
-          <div className="p-8 text-center text-gray-500">
-            No entries found
-          </div>
+          <div className="p-8 text-center text-gray-500">No entries found</div>
         ) : (
           <div className="overflow-x-auto">
             <table className="w-full">

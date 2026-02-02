@@ -64,8 +64,7 @@ export const handleCreateDictionaryEntry: RequestHandler = (req, res) => {
 
   if (!language || !word || !definitions || !Array.isArray(definitions)) {
     return res.status(400).json({
-      error:
-        "Missing required fields: language, word, definitions (array)",
+      error: "Missing required fields: language, word, definitions (array)",
     });
   }
 
@@ -168,7 +167,7 @@ export const handleDeleteDictionaryEntry: RequestHandler = (req, res) => {
 // Batch create multiple entries
 export const handleBatchCreateDictionaryEntries: RequestHandler = (
   req,
-  res
+  res,
 ) => {
   const { language, entries } = req.body;
 
@@ -188,21 +187,17 @@ export const handleBatchCreateDictionaryEntries: RequestHandler = (
     errors: [] as string[],
   };
 
-  entries.forEach(
-    (entry: { word: string; definitions: DictionaryEntry[] }) => {
-      const wordLower = entry.word.toLowerCase();
+  entries.forEach((entry: { word: string; definitions: DictionaryEntry[] }) => {
+    const wordLower = entry.word.toLowerCase();
 
-      if (dictionaryDatabase[language][wordLower]) {
-        results.skipped++;
-        results.errors.push(
-          `Word '${entry.word}' already exists, skipped`
-        );
-      } else {
-        dictionaryDatabase[language][wordLower] = entry.definitions;
-        results.created++;
-      }
+    if (dictionaryDatabase[language][wordLower]) {
+      results.skipped++;
+      results.errors.push(`Word '${entry.word}' already exists, skipped`);
+    } else {
+      dictionaryDatabase[language][wordLower] = entry.definitions;
+      results.created++;
     }
-  );
+  });
 
   res.status(201).json({
     message: "Batch create completed",
@@ -223,9 +218,7 @@ export const handleSearchDictionary: RequestHandler = (req, res) => {
 
   const languageData = dictionaryDatabase[language as string];
   if (!languageData) {
-    return res
-      .status(404)
-      .json({ error: `Language '${language}' not found` });
+    return res.status(404).json({ error: `Language '${language}' not found` });
   }
 
   const queryLower = (query as string).toLowerCase();

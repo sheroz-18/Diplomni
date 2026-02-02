@@ -52,6 +52,7 @@ Navigate to `/admin` in your browser to access the admin panel.
 #### Statistics
 
 The dashboard shows:
+
 - Total languages supported
 - Number of entries in the current language
 - Total entries across all languages
@@ -65,6 +66,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Endpoint:** `GET /api/admin/languages`
 
 **Response:**
+
 ```json
 {
   "supportedLanguages": [
@@ -86,6 +88,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Example:** `GET /api/admin/dictionary/en`
 
 **Response:**
+
 ```json
 {
   "language": "en",
@@ -114,6 +117,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Example:** `GET /api/admin/dictionary/en/hello`
 
 **Response:**
+
 ```json
 {
   "word": "hello",
@@ -133,6 +137,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Endpoint:** `POST /api/admin/dictionary`
 
 **Request Body:**
+
 ```json
 {
   "language": "en",
@@ -150,6 +155,7 @@ All API endpoints require JSON requests and return JSON responses.
 ```
 
 **Response:** `201 Created`
+
 ```json
 {
   "message": "Dictionary entry created successfully",
@@ -166,6 +172,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Example:** `PUT /api/admin/dictionary/en/hello`
 
 **Request Body:**
+
 ```json
 {
   "definitions": [
@@ -179,6 +186,7 @@ All API endpoints require JSON requests and return JSON responses.
 ```
 
 **Response:** `200 OK`
+
 ```json
 {
   "message": "Dictionary entry updated successfully",
@@ -195,6 +203,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Example:** `DELETE /api/admin/dictionary/en/hello`
 
 **Response:** `200 OK`
+
 ```json
 {
   "message": "Dictionary entry deleted successfully",
@@ -208,6 +217,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Endpoint:** `POST /api/admin/dictionary/batch`
 
 **Request Body:**
+
 ```json
 {
   "language": "en",
@@ -237,6 +247,7 @@ All API endpoints require JSON requests and return JSON responses.
 ```
 
 **Response:** `201 Created`
+
 ```json
 {
   "message": "Batch create completed",
@@ -254,6 +265,7 @@ All API endpoints require JSON requests and return JSON responses.
 **Endpoint:** `GET /api/admin/dictionary-search?language=en&query=hello`
 
 **Response:**
+
 ```json
 {
   "language": "en",
@@ -273,6 +285,7 @@ All API endpoints require JSON requests and return JSON responses.
 The system includes comprehensive mock data for three languages:
 
 ### English (24 entries)
+
 - Basic greetings: hello, goodbye, please, thank
 - Nature: water, fire, tree, flower
 - Emotions: love, happy, sad
@@ -282,6 +295,7 @@ The system includes comprehensive mock data for three languages:
 - Colors: white, black, green, red
 
 ### Tajik (22 entries)
+
 - Basic greetings: салом, хода, шукрон
 - Nature: об, оташ, фарғона
 - Emotions: мӯҳаббат, хўшҳолӣ, гам
@@ -290,6 +304,7 @@ The system includes comprehensive mock data for three languages:
 - Colors: сафед, сиёҳ, сабз, суркҳ
 
 ### Russian (22 entries)
+
 - Basic greetings: привет, пока, спасибо, пожалуйста
 - Nature: вода, огонь, дерево, цветок
 - Emotions: любовь, счастье, грусть
@@ -347,33 +362,35 @@ curl "http://localhost:8080/api/admin/dictionary-search?language=en&query=hel"
 
 ```javascript
 // Get all languages
-fetch('/api/admin/languages')
-  .then(res => res.json())
-  .then(data => console.log(data));
+fetch("/api/admin/languages")
+  .then((res) => res.json())
+  .then((data) => console.log(data));
 
 // Add new word
-fetch('/api/admin/dictionary', {
-  method: 'POST',
-  headers: { 'Content-Type': 'application/json' },
+fetch("/api/admin/dictionary", {
+  method: "POST",
+  headers: { "Content-Type": "application/json" },
   body: JSON.stringify({
-    language: 'en',
-    word: 'wonderful',
-    definitions: [{
-      partOfSpeech: 'Adjective',
-      meaning: 'Inspiring wonder',
-      example: 'What a wonderful day!'
-    }]
-  })
+    language: "en",
+    word: "wonderful",
+    definitions: [
+      {
+        partOfSpeech: "Adjective",
+        meaning: "Inspiring wonder",
+        example: "What a wonderful day!",
+      },
+    ],
+  }),
 })
-.then(res => res.json())
-.then(data => console.log(data));
+  .then((res) => res.json())
+  .then((data) => console.log(data));
 
 // Delete word
-fetch('/api/admin/dictionary/en/wonderful', {
-  method: 'DELETE'
+fetch("/api/admin/dictionary/en/wonderful", {
+  method: "DELETE",
 })
-.then(res => res.json())
-.then(data => console.log(data));
+  .then((res) => res.json())
+  .then((data) => console.log(data));
 ```
 
 ## Error Handling

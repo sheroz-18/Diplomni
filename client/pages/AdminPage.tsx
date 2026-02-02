@@ -5,7 +5,7 @@ import { BookOpen, Settings } from "lucide-react";
 
 export default function AdminPage() {
   const [activeTab, setActiveTab] = useState<"dictionary" | "settings">(
-    "dictionary"
+    "dictionary",
   );
 
   return (
@@ -15,9 +15,7 @@ export default function AdminPage() {
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8">
         {/* Admin Header */}
         <div className="mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">
-            Admin Panel
-          </h1>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">Admin Panel</h1>
           <p className="text-gray-600">
             Manage dictionary entries and system settings
           </p>
