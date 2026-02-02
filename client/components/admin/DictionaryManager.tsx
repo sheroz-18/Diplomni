@@ -133,9 +133,12 @@ export default function DictionaryManager() {
     };
 
     try {
+      let response;
+      let errorMessage = "";
+
       if (editingWord) {
         // Update
-        const response = await fetch(
+        response = await fetch(
           `/api/admin/dictionary/${selectedLanguage}/${editingWord.word}`,
           {
             method: "PUT",
@@ -143,27 +146,46 @@ export default function DictionaryManager() {
             body: JSON.stringify({ definitions: payload.definitions }),
           }
         );
-        if (!response.ok) throw new Error("Failed to update");
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          errorMessage = errorData.error || `Error: ${response.status}`;
+          throw new Error(errorMessage);
+        }
       } else {
         // Create
-        const response = await fetch("/api/admin/dictionary", {
+        response = await fetch("/api/admin/dictionary", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify(payload),
         });
-        if (!response.ok) throw new Error("Failed to create");
+
+        if (!response.ok) {
+          const errorData = await response.json();
+          errorMessage = errorData.error || `Error: ${response.status}`;
+          throw new Error(errorMessage);
+        }
       }
 
       // Reload entries
       const reloadResponse = await fetch(
         `/api/admin/dictionary/${selectedLanguage}`
       );
+
+      if (!reloadResponse.ok) {
+        throw new Error("Failed to reload entries");
+      }
+
       const data = await reloadResponse.json();
-      setEntries(data.entries);
+      setEntries(data.entries || []);
       setIsOpenDialog(false);
+
+      // Show success message
+      alert(editingWord ? "Word updated successfully!" : "Word created successfully!");
     } catch (err) {
-      console.error("Error saving entry:", err);
-      alert("Error saving entry");
+      const errorMessage = err instanceof Error ? err.message : "Unknown error";
+      console.error("Error saving entry:", errorMessage);
+      alert(`Error saving entry: ${errorMessage}`);
     }
   };
 
