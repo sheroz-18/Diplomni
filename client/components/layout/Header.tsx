@@ -19,9 +19,9 @@ export default function Header() {
             className="flex items-center hover:opacity-80 transition"
           >
             <img
-              src="https://cdn.builder.io/api/v1/image/assets%2Fb12d669516404071a42688a7f38de307%2Fa91ce42bc80d47dabe2d67749230d0b6?format=webp&width=800&height=1200"
+              src="https://cdn.builder.io/api/v1/image/assets%2Fb12d669516404071a42688a7f38de307%2Fa91ce42bc80d47dabe2d67749230d0b6?format=webp&width=200&height=200"
               alt="Тарҷумаи Тоҷикӣ"
-              className="h-16 w-auto"
+              className="h-14 w-auto object-contain"
             />
           </Link>
 
