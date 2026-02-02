@@ -182,7 +182,6 @@ const mockTranslations: Record<string, Record<string, string>> = {
       здоровье: "health",
       животное: "animal",
       птица: "bird",
-      рыба: "fish",
       насекомое: "insect",
       пчела: "bee",
       бабочка: "butterfly",
