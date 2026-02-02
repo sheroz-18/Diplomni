@@ -51,6 +51,12 @@ export default function Header() {
             >
               Оид ба мо
             </a>
+            <Link
+              to="/admin"
+              className="text-gray-700 hover:text-blue-600 font-medium transition px-3 py-1 bg-blue-50 rounded-lg"
+            >
+              Admin
+            </Link>
           </nav>
 
           {/* Mobile Menu Button */}
