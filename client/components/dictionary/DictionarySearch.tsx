@@ -74,7 +74,7 @@ export default function DictionarySearch() {
             Луғати Тоҷикӣ
           </h1>
           <p className="text-gray-600">
-            Калимаҳо дарф кунед ва маъноҳои онҳоро кашф кунед
+            Калимаҳо ҷустуҷу кунед ва маъноҳои онҳоро кашф кунед
           </p>
         </div>
 
