@@ -19,7 +19,7 @@ export default function Header() {
             className="flex items-center hover:opacity-80 transition"
           >
             <img
-              src="/logo.webp"
+              src="/logo.png"
               alt="Тарҷумаи Тоҷикӣ"
               className="h-14 w-auto object-contain"
             />
